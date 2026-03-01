@@ -3,6 +3,7 @@ import helmet from "helmet";
 import cors from "cors";
 import projectRoutes from "./routes/project.route.js"
 import messageRoutes from "./routes/message.route.js"
+import blogRoutes from "./routes/blog.route.js"
 
 // Initialize Express
 const app: Application = express();
@@ -25,6 +26,6 @@ app.get('/health', (req: Request, res: Response): void => {
 // We will add your projectRoutes here next!
 app.use("/api/projects", projectRoutes);
 app.use("/api/messages", messageRoutes);
-
+app.use("/api/blogs", blogRoutes)
 // Export the configured app (DO NOT CALL app.listen HERE)
 export default app;
