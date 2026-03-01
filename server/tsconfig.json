@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",                                  /* Set the JavaScript version */
+    "module": "NodeNext",                                /* Required for modern Node.js */
+    "moduleResolution": "NodeNext",
+    "rootDir": "./src",                                  /* Where your TS files live */
+    "outDir": "./dist",                                 /* Where the compiled JS will go */
+    "esModuleInterop": true,                             /* Fixes compatibility issues */
+    "forceConsistentCasingInFileNames": true,            /* Important for Windows vs Linux */
+    "strict": true,                                      /* Enables all strict type-checking options */
+    "skipLibCheck": true                                 /* Speeds up compilation */
+  },
+  "include": ["src/**/*"],                               /* Only compile files in src */
+  "exclude": ["node_modules"]                            /* Never compile dependencies */
+}
