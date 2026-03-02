@@ -2,7 +2,7 @@ import { Request , Response, NextFunction } from "express";
 import  Jwt  from "jsonwebtoken";
 
 interface decodedToken {
-    i: string;
+    id: string;
     iat:number;
     exp: number;
 }
@@ -26,6 +26,7 @@ export const protect = async (req:Request, res: Response, next: NextFunction): P
         }
 
         const decoded = Jwt.verify(token, process.env.JWT_SECRET || "fallback_secret") as decodedToken;
+        (req as any).user = {_id:decoded.id};
         next();
     } catch (error) {
         res.status(401).json({

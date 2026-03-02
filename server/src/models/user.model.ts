@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 export interface IUser extends Document{
     email: string;
     password: string;
+    resumeUrl?: string;
     comparePassword(password: string): Promise<boolean>;
 }
 
@@ -18,6 +19,10 @@ const userSchema: Schema = new Schema({
         type: String,
         required: true,
         // select:false
+    },
+    resumeUrl:{
+        type:String,
+        default:""
     }
 },{timestamps:true});
 
