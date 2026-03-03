@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
+import Footer from "./components/layout/Footer";
 
 //for public
 import Home from "./pages/public/Home";
@@ -20,7 +21,7 @@ import Settings from "./pages/admin/Settings";
 
 export default function App() {
     return(
-        <div className="min-h-screen bg-[#050505] text-white">
+        <div className="min-h-screen bg-obsidian text-white grow">
             <Navbar/>
             <main className="container mx-auto pt-24 px-6">
                     <Routes>
@@ -41,6 +42,7 @@ export default function App() {
                         <Route path = "*" element ={<NotFound/>}/>
                     </Routes>
             </main>
+            <Footer />
         </div>   
     );
 }
