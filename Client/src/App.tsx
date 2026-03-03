@@ -16,13 +16,13 @@ import ManageProjects from "./pages/admin/ManageProjects";
 import ManageBlogs from "./pages/admin/ManageBlogs";
 import Inbox from "./pages/admin/Inbox";
 import Settings from "./pages/admin/Settings";
-import { div } from "framer-motion/client";
+
 
 export default function App() {
     return(
         <div className="min-h-screen bg-[#050505] text-white">
             <Navbar/>
-            <main className="container mx-auto">
+            <main className="container mx-auto pt-24 px-6">
                     <Routes>
                         <Route path = "/" element ={<Home/>}/>
                         <Route path = "/projects" element ={<ProjectGallery/>}/>
@@ -35,7 +35,7 @@ export default function App() {
                         <Route path = "/admin/dashboard" element ={<Dashboard/>}/>
                         <Route path = "/admin/projects" element ={<ManageProjects/>}/>
                         <Route path = "/admin/blogs" element ={<ManageBlogs/>}/>
-                        <Route path = "/admin/inboc" element ={<Inbox/>}/>
+                        <Route path = "/admin/inbox" element ={<Inbox/>}/>
                         <Route path = "/admin/settings" element ={<Settings/>}/>
 
                         <Route path = "*" element ={<NotFound/>}/>
