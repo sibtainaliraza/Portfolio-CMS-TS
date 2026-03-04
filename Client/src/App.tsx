@@ -21,9 +21,9 @@ import Settings from "./pages/admin/Settings";
 
 export default function App() {
     return(
-        <div className="min-h-screen bg-obsidian text-white grow">
+        <div className="min-h-screen bg-obsidian text-white grow flex flex-col">
             <Navbar/>
-            <main className="container mx-auto pt-24 px-6">
+            <main className="container mx-auto pt-24 px-6 flex-grow">
                     <Routes>
                         <Route path = "/" element ={<Home/>}/>
                         <Route path = "/projects" element ={<ProjectGallery/>}/>
@@ -42,6 +42,7 @@ export default function App() {
                         <Route path = "*" element ={<NotFound/>}/>
                     </Routes>
             </main>
+
             <Footer />
         </div>   
     );
