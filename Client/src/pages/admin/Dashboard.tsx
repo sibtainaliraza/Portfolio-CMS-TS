@@ -10,7 +10,6 @@ export default function Dashboard() {
       try {
         const [p, b, m] = await Promise.all([
           fetch(`${API_BASE_URL}/projects`).then(res => res.json()),
-          fetch(`${API_BASE_URL}/blogs`).then(res => res.json()),
           fetch(`${API_BASE_URL}/messages`).then(res => res.json())
         ]);
         setStats({

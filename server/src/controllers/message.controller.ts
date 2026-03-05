@@ -1,42 +1,50 @@
 import { Request, Response } from "express";
 import Message from "../models/message.model.js";
 
-export const sendMessage = async (req:Request, res: Response):Promise<void> => {
+export const sendMessage = async (req: Request, res: Response): Promise<void> => {
     try {
-        const newMessage = await Message.create(req.body);
+        const { name, email, message } = req.body;
+
+        // Manual validation for faster response
+        if (!name || !email || !message) {
+            res.status(400).json({
+                success: false,
+                error: "All fields (name, email, message) are required"
+            });
+            return;
+        }
+
+        const newMessage = await Message.create({ name, email, message });
+        
         res.status(201).json({
-            sucess:true,
-            message:"Message sent successfully",
+            success: true,
+            message: "Message secured successfully",
             data: newMessage
         });
 
     } catch (error) {
-        if(error instanceof Error)
-        {
-            res.status(400).json ({
-                sucess:false,
-                error:error.message
+        if (error instanceof Error) {
+            // Returns the exact Mongoose error (e.g., "Message must be at least 10 characters")
+            res.status(400).json({
+                success: false,
+                error: error.message
             });
         }
     }
 };
 
-
-export const getMessages = async (req:Request, res: Response): Promise <void> => {
+export const getMessages = async (req: Request, res: Response): Promise<void> => {
     try {
+        // Fetches for your Admin Inbox
         const messages = await Message.find().sort("-createdAt");
         res.status(200).json({
-            sucess:true,
+            success: true,
             count: messages.length,
             data: messages
         });
     } catch (error) {
-        if(error instanceof Error)
-        {
-            res.status(500).json({
-                sucess:false,
-                error: error.message
-            });
+        if (error instanceof Error) {
+            res.status(500).json({ success: false, error: error.message });
         }
     }
 };

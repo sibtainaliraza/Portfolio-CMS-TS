@@ -2,18 +2,20 @@ import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 
+// PUBLIC PAGES
 import Home from "./pages/public/Home";
+import About from "./pages/public/About"; 
 import ProjectGallery from "./pages/public/ProjectsGallery"; 
 import ProjectDetail from "./pages/public/ProjectDetail";
-import BlogGallery from "./pages/public/BlogGallery";
 import Contact from "./pages/public/Contact";
 import NotFound from "./pages/public/NotFound";
 
+// ADMIN PAGES
 import Login from "./pages/admin/Login";
 import AdminLayout from "./pages/admin/AdminLayout";
 import Dashboard from "./pages/admin/Dashboard";
 import ManageProjects from "./pages/admin/ManageProjects";
-import ManageBlogs from "./pages/admin/ManageBlogs";
+import EditAbout from "./pages/admin/editAbout"; 
 import Inbox from "./pages/admin/Inbox";
 import Settings from "./pages/admin/Settings";
 
@@ -36,9 +38,9 @@ export default function App() {
       {/* PUBLIC ROUTES */}
       <Route element={<PublicLayout />}>
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} /> {/* REPLACED: Blog with About */}
         <Route path="/projects" element={<ProjectGallery />} />
         <Route path="/projects/:id" element={<ProjectDetail />} />
-        <Route path="/blog" element={<BlogGallery />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} />
       </Route>
@@ -46,14 +48,14 @@ export default function App() {
       {/* ADMIN LOGIN */}
       <Route path="/admin/login" element={<Login />} />
 
-      {/* SECURE ADMIN ROUTES (Layout Wrapper) */}
+      {/* SECURE ADMIN ROUTES */}
       <Route path="/admin" element={<AdminLayout />}>
-        {/* If user types just "/admin", auto-redirect to dashboard */}
+        {/* Auto-redirect /admin to /admin/dashboard */}
         <Route index element={<Navigate to="dashboard" replace />} />
         
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="projects" element={<ManageProjects />} />
-        <Route path="blogs" element={<ManageBlogs />} />
+        <Route path="about" element={<EditAbout />} /> {/* REPLACED: Blogs with Edit About */}
         <Route path="inbox" element={<Inbox />} />
         <Route path="settings" element={<Settings />} />
       </Route>
