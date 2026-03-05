@@ -56,7 +56,7 @@ export default function AboutPage() {
         {/* Sidebar: Skills & Quick Info */}
         <aside className="space-y-8">
           <div className="glass p-8 rounded-3xl border border-white/10 bg-black/40">
-            <h3 className="text-xs uppercase tracking-widest text-gray-500 mb-6 font-bold">Tech Arsenal</h3>
+            <h3 className="text-xs uppercase tracking-widest text-gray-500 mb-6 font-bold">Skills</h3>
             <div className="flex flex-wrap gap-2">
               {data?.skills?.map((skill: string) => (
                 <span key={skill} className="px-3 py-1.5 bg-white/5 border border-white/10 text-gray-400 rounded-lg text-[10px] font-bold uppercase tracking-wider">
