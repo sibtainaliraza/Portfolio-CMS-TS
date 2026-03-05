@@ -1,39 +1,74 @@
 # Portfolio CMS - Technical Documentation
 
-A professional portfolio management system built using the MERN stack with a focus on stream-based asset processing and dynamic document delivery.
+A high-performance, professional portfolio management engine built with the **MERN** stack, designed with a focus on **Low-Level Design (LLD)** principles and stream-based asset processing.
 
-## Technical Features
+## Technical Overview
+This project serves as a centralized content management system (CMS) for a developer's professional brand. It moves away from static asset hosting in favor of a dynamic, cloud-integrated delivery system.
 
-### 1. Professional Resume Delivery System
-The system implements a redirection layer that serves documents with preserved filenames.
-* **Redirection Logic**: The server fetches the stored Cloudinary URL and modifies it to include attachment headers before redirecting the client.
-* **Filename Preservation**: Uses the `fl_attachment` parameter to ensure files download as `YourName-CV.pdf` instead of a generated hash.
-* **Public Accessibility**: Features a public endpoint that allows recruiters to download the latest resume without requiring authentication.
+---
 
-### 2. Stream-Based Asset Management
-The backend is designed to handle file transmissions efficiently without local storage.
-* **Memory Processing**: Utilizes Multer memory storage to capture incoming files as buffers.
-* **Cloudinary Streaming**: Employs Streamifier to pipe data directly to the cloud storage provider.
-* **Secure Admin Controls**: Includes a protected interface for updating system assets and project metadata.
+## Technical Features & Implementation Details
+
+### 1. Professional Resume Redirection Service
+To solve the issue of cloud providers generating random, non-professional filenames (e.g., `qq39qapy...`), I implemented a server-side redirection layer.
+* **Logic**: Instead of linking directly to Cloudinary, the frontend calls a public Express endpoint.
+* **Dynamic Injection**: The backend fetches the stored URL from MongoDB and injects the `fl_attachment` parameter into the string.
+* **Result**: This forces the browser to initiate a download with a professional, predefined name (e.g., `Aman-CV.pdf`), improving recruiter experience.
+
+### 2. Zero-Disk Buffer Streaming
+The system is architected to be "stateless" regarding file storage to ensure compatibility with modern cloud hosting like Render or Vercel.
+* **Memory Management**: Multer is configured with `memoryStorage()`, which keeps incoming file data in a RAM buffer rather than writing to a temporary local folder.
+* **Streamifier Integration**: To transfer this buffer to Cloudinary, I implemented a streaming utility that pipes the buffer directly into the Cloudinary Upload API.
+* **Performance**: This reduces Disk I/O overhead and increases security by ensuring sensitive documents never touch the server's local file system.
+
+### 3. Secure Admin Infrastructure
+* **JWT-Based Authentication**: The system uses JSON Web Tokens to protect management routes.
+* **Custom Middleware**: A `protect` middleware intercepts requests to verify tokens before allowing access to the `System Settings` or `Manage Projects` components.
+* **Data Integrity**: Uses MongoDB `upsert` (update-or-insert) logic to ensure that a single master CV record is maintained without duplicates.
+
+---
 
 ## System Architecture
 
-### Tech Stack
-* **Frontend**: React, TypeScript, Tailwind CSS.
-* **Backend**: Node.js, Express, TypeScript, Multer.
-* **Database**: MongoDB (Mongoose).
-* **Cloud Storage**: Cloudinary.
+### Frontend Layer
+* **React (Vite)**: For high-speed development and optimized build performance.
+* **TypeScript**: Enforces strict typing across all components to prevent runtime data mismatches.
+* **Tailwind CSS**: A "glassmorphism" UI design chosen for a modern, technical aesthetic.
 
-### Environment Configuration
-The application requires an `.env` file for secure credential management.
-* **MONGODB_URI**: Connection string for the database cluster.
-* **CLOUDINARY_API_SECRET**: Secret key for authorized cloud uploads.
-* **JWT_SECRET**: Key used for signing administrative session tokens.
+### Backend Layer
+* **Node.js & Express**: Handling the REST API architecture.
+* **Multer**: Configured for memory-resident file handling.
+* **Mongoose**: Providing a schema-based solution for MongoDB data modeling.
+
+### Infrastructure
+* **MongoDB Atlas**: Managed cloud database.
+* **Cloudinary**: External CDN and asset storage cluster.
+
+---
 
 ## API Reference
 
-| Method | Endpoint | Access | Description |
-| :--- | :--- | :--- | :--- |
-| **GET** | `/api/resume/download` | Public | Serves the CV with a professional filename. |
-| **POST** | `/api/resume/upload` | Private | Processes file buffers and syncs to the cloud. |
-| **GET** | `/api/projects` | Public | Retrieves the curated gallery of projects. |
+### Public Endpoints
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| **GET** | `/api/resume/download` | Triggers a professional, renamed download of the CV. |
+| **GET** | `/api/projects` | Retrieves the curated project list for the public gallery. |
+
+### Protected Admin Endpoints
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| **POST** | `/api/resume/upload` | Processes file buffer and synchronizes with Cloudinary and MongoDB. |
+| **PUT** | `/api/projects/:id` | Updates specific project metadata and visibility settings. |
+
+---
+
+## Environment Configuration
+To run this project locally, create an `.env` file in the server root:
+```env
+PORT=8000
+MONGODB_URI=your_mongodb_cluster_link
+JWT_SECRET=your_secure_random_key
+CLOUDINARY_CLOUD_NAME=your_name
+CLOUDINARY_API_KEY=your_key
+CLOUDINARY_API_SECRET=your_secret
+

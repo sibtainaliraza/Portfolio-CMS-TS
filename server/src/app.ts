@@ -17,7 +17,8 @@ app.use(helmet({
     crossOriginResourcePolicy: { policy: "cross-origin" }
 }));
 app.use(cors({
-    origin: "http://localhost:5173",
+    // Add your Netlify URL here
+    origin: ["http://localhost:5173", "https://your-site-name.netlify.app"], 
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"]
