@@ -10,28 +10,33 @@ export interface IProject extends Document {
     updatedAt: Date;
 }
 
+
 const projectSchema: Schema<IProject> = new Schema(
     {
-        title:{
+        title: {
             type: String,
-            required:[true,"Project title is required"],
-            trim:true
+            required: [true, "Project title is required"],
+            trim: true
         },
-        description:{
+        description: {
             type: String,
-            required:[true, "Project description is required"],
+            required: [true, "Project description is required"],
         },
-        techStack:{
+        techStack: {
             type: [String],
-            required:[true,"At least one technology is required"],
+            default: [] 
         },
-        githubUrl:{
+        githubUrl: {
             type: String,
-            required:false
+            default: "" 
+        },
+        liveUrl: {      
+            type: String,
+            default: ""
         },
     },
     {
-        timestamps:true,
+        timestamps: true,
     }
 );
 
