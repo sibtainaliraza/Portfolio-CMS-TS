@@ -1,10 +1,11 @@
+// server/src/routes/upload.route.ts
 import { Router } from "express";
+import multer from "multer";
 import { uploadFile } from "../controllers/upload.controller.js";
-import { protect } from "../middleware/auth.middleware.js";
-import { upload } from "../middleware/upload.middleware.js";
 
-const router: Router = Router();
+const router = Router();
+const upload = multer({ storage: multer.memoryStorage() });
 
-router.post("/", protect, upload.single("file"),uploadFile);
+router.post("/", upload.single("file"), uploadFile); // Key MUST be "file" to match FormData.append("file", file)
 
 export default router;
