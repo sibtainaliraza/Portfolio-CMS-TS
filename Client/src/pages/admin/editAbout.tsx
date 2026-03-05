@@ -5,7 +5,7 @@ export default function EditAbout() {
   const [formData, setFormData] = useState({ bio: "", skills: "" });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   
-  const API_BASE_URL = "http://localhost:8000/api";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000/api";
   const token = localStorage.getItem("adminToken");
 
   // Load existing profile data from MongoDB on component mount

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 export default function Home() {
   const [aboutData, setAboutData] = useState<{ bio: string } | null>(null);
-  const API_BASE_URL = "http://localhost:8000/api";
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000/api";
 
   // Fetch only the bio data for the simplified Home page
   useEffect(() => {

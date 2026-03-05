@@ -3,8 +3,7 @@ import { useState, useEffect } from "react";
 
 export default function AboutPage() {
   const [data, setData] = useState<{ bio: string; skills: string[] } | null>(null);
-  const API_BASE_URL = "http://localhost:8000/api";
-
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000/api";
   useEffect(() => {
     fetch(`${API_BASE_URL}/about`)
       .then((res) => res.json())

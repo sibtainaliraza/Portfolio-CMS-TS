@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function ProjectGallery() {
   const [projects, setProjects] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true); // Added loading state for better UX
-  const API_BASE_URL = "http://localhost:8000/api";
+ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000/api";
 
   useEffect(() => {
     fetch(`${API_BASE_URL}/projects`)
