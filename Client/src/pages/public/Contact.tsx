@@ -6,7 +6,7 @@ export default function Contact() {
     const [formData, setFormData] = useState({name:"", email:"", message:""});
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error"> ("idle");
 
-    const API_BASE_URL = "http://localhost:5000/api";
+    const API_BASE_URL = "http://localhost:8000/api";
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({...formData, [e.target.name]: e.target.value});
@@ -90,7 +90,7 @@ export default function Contact() {
 
                 <div className="flex flex-col gap-2 md:col-span-2">
                     <label className="text-xs uppercase tracking-widest text-gray-500 ml-2">Message</label>
-                    <textarea required name="message" value={formData.message} onChange={handleChange} rows={5}  placeholder="Tell me about you project..." className="bg-white/5 border border-white/10 rounded-xl p-3 focus:border-electric-teal outline-none transition-all text-white" ></textarea>
+                    <textarea required name="message" value={formData.message} onChange={handleChange} rows={5}  placeholder="Tell me about your project..." className="bg-white/5 border border-white/10 rounded-xl p-3 focus:border-electric-teal outline-none transition-all text-white" ></textarea>
                 </div>
 
                 <button disabled={status === "loading"} type="submit" className="md:col-span-2 bg-electric-teal text-black font-bold py-4 rounded-xl hover:scale[1.02] active: scale-95 transition-all shadow-[0_0_20px_rgba(0, 229, 55, 0.3)] disabled:opacity-50 disabled:hover:scale-100 flex justify-center items-center h-14">

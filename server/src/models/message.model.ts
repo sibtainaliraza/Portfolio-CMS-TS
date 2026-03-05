@@ -19,10 +19,6 @@ const messageSchema: Schema = new Schema({
         match:[/.+\@.+\..+/, "Please fill a valid email address"],
         lowercase:true
     },
-    subject:{
-        type:String,
-        default:"Portfolio Inquiry"
-    },
     message:{
         type:String,
         required: [true, "Message body cannot be empty"],

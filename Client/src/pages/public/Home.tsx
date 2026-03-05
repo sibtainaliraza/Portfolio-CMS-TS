@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function Home() {
 
-  const API_BASE_URL = "http://localhost:5000/api";
+  const API_BASE_URL = "http://localhost:8000/api";
   return (
     <div className="flex flex-col items-center justify-center min-h-[70vh] text-center px-6">
 

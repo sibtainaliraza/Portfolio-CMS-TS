@@ -11,7 +11,7 @@ interface Config {
 }
 
 export const config: Config = {
-    port:Number(process.env.PORT) || 5000,
+    port:Number(process.env.PORT) || 8000,
     mongoUri: process.env.MONGO_URI as string,
     nodeEnv: (process.env.NODE_ENV as string ) || "development",
     jwtSecret: (process.env.JWT_SECRET as string) || "development_secret_key",
