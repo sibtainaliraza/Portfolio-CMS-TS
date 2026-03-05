@@ -1,39 +1,55 @@
 import { useState } from "react";
 
-export default function Settings() {
-  const [resumeUrl, setResumeUrl] = useState("");
-  
-  // This would point to your uploadRoutes in the future
-  const handleUpdateResume = () => {
-    console.log("Updating resume link to:", resumeUrl);
-    // Add fetch logic to update user profile here
+export default function SystemSettings() {
+  const [isUploading, setIsUploading] = useState(false);
+  const API_BASE_URL = "http://localhost:8000/api";
+  const token = localStorage.getItem("adminToken");
+
+  const onFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setIsUploading(true);
+    const formData = new FormData();
+    formData.append("resume", file); // Must match upload.single("resume")
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/resume/upload`, {
+        method: "POST",
+        headers: { 
+            "Authorization": `Bearer ${token}` 
+            // DO NOT SET CONTENT-TYPE HERE
+        },
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        alert("CV Synchronized with Cloudinary and Database!");
+      } else {
+        alert(`Upload Failed: ${result.message}`);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Network transmission error.");
+    } finally {
+      setIsUploading(false);
+      e.target.value = ""; // Clear input for next upload
+    }
   };
 
   return (
-    <div className="max-w-2xl space-y-12">
-      <h1 className="text-3xl font-bold">System <span className="text-electric-teal">Settings</span></h1>
-
-      <div className="glass p-8 rounded-2xl border border-white/10 space-y-6">
-        <div>
-          <h2 className="text-lg font-bold text-white mb-2">Profile Assets</h2>
-          <p className="text-sm text-gray-500 mb-6">Manage the primary resume file used for the public "Download CV" button.</p>
-          
-          <div className="flex gap-4">
-            <input 
-              type="text"
-              placeholder="Cloudinary or S3 URL"
-              className="flex-grow bg-black/40 border border-white/10 p-4 rounded-xl text-white outline-none focus:border-electric-teal"
-              value={resumeUrl}
-              onChange={(e) => setResumeUrl(e.target.value)}
-            />
-            <button 
-              onClick={handleUpdateResume}
-              className="bg-white/5 border border-white/10 text-white px-6 rounded-xl font-bold hover:bg-white/10 transition-all"
-            >
-              UPDATE
-            </button>
-          </div>
-        </div>
+    <div className="max-w-4xl space-y-12">
+      <h1 className="text-3xl font-bold text-white">System <span className="text-electric-teal">Settings</span></h1>
+      <div className="glass p-10 rounded-3xl border border-white/10 text-center">
+        <input type="file" id="resume-upload" className="hidden" accept=".pdf" onChange={onFileChange} />
+        <label 
+          htmlFor="resume-upload" 
+          className={`cursor-pointer inline-block bg-electric-teal text-black font-bold py-4 px-10 rounded-xl transition-all ${isUploading ? 'opacity-50 animate-pulse' : 'hover:scale-105'}`}
+        >
+          {isUploading ? "SYNCING TO CLOUD..." : "UPLOAD MASTER CV (PDF)"}
+        </label>
       </div>
     </div>
   );
