@@ -16,7 +16,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center px-6 space-y-32 py-12 overflow-hidden">
-      
+
       {/* --- HERO SECTION --- */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -37,20 +37,25 @@ export default function Home() {
         </p>
 
         <div className="flex flex-wrap gap-4 justify-center relative z-10">
-          <Link 
-            to="/projects" 
+          <Link
+            to="/projects"
             className="bg-[var(--color-electric-teal)] text-black px-8 py-3 rounded-full font-bold hover:scale-105 transition-transform shadow-[0_0_20px_rgba(0,229,255,0.4)]"
           >
             View Projects
           </Link>
-          <a href={`${API_BASE_URL}/resume/download`} target="_blank" rel="noopener noreferrer">
+          <a
+            href={`${API_BASE_URL}/resume/download`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-electric-teal transition-colors"
+          >
             Download CV
           </a>
         </div>
       </motion.div>
 
       {/* --- REFINED ABOUT SECTION (NO SKILLS) --- */}
-      <motion.section 
+      <motion.section
         id="about"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
