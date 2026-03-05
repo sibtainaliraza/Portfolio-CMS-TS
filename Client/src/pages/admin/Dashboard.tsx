@@ -1,28 +1,33 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 
 export default function Dashboard() {
   const [stats, setStats] = useState({ projects: 0, blogs: 0, messages: 0 });
-  const API_BASE_URL = "http://localhost:8000/api";
+  
+  // FIX 1: Use the Environment Variable we set in Netlify
+  // This falls back to localhost only for your local development
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000/api";
 
   useEffect(() => {
     const fetchStats = async () => {
       try {
+        // FIX 2: Added the third fetch (blogs) so [p, b, m] matches exactly
         const [p, b, m] = await Promise.all([
           fetch(`${API_BASE_URL}/projects`).then(res => res.json()),
+          fetch(`${API_BASE_URL}/blogs`).then(res => res.json()), // Added this line
           fetch(`${API_BASE_URL}/messages`).then(res => res.json())
         ]);
+
         setStats({
           projects: p.data?.length || p.length || 0,
-          blogs: b.data?.length || 0,
-          messages: m.data?.length || 0
+          blogs: b.data?.length || b.length || 0,
+          messages: m.data?.length || m.length || 0
         });
       } catch (error) {
         console.error("Stats fetch failed", error);
       }
     };
     fetchStats();
-  }, []);
+  }, [API_BASE_URL]);
 
   return (
     <div className="space-y-8">
