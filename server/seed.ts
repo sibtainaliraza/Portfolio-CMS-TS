@@ -1,32 +1,23 @@
 import mongoose from "mongoose";
-import user from "../server/src/models/user.model"; // Adjust this path if needed
+import User from "../server/src/models/user.model.js"; 
 import dotenv from "dotenv";
 
 dotenv.config();
 
 const seedAdmin = async () => {
   try {
-    // 1. Connect to your Production Database
     await mongoose.connect(process.env.MONGO_URI as string);
-    console.log("Connected to MongoDB for seeding...");
+    
+    // Clear the old failed user first
+    await User.deleteOne({ email: "admin@example.com" });
 
-    // 2. Check if admin already exists
-    const adminExists = await user.findOne({ role: "admin" });
-    if (adminExists) {
-      console.log("Admin already exists in the system core.");
-      process.exit();
-    }
-
-    // 3. Create the Admin User
-    const admin = new user({
-      name: "Portfolio Admin",
-      email: "sibtain@example.com", 
-      password: "Iwillconquer123", // Ensure your User model hashes this!
-      role: "admin"
+    const admin = new User({
+      email: "sibtain@example.com",
+      password: "Iwillconquer123", // The pre-save hook in your model will hash this
     });
 
     await admin.save();
-    console.log("Admin user created successfully!");
+    console.log("Admin user saved to MongoDB! The pre-save hook has hashed your password.");
     process.exit();
   } catch (error) {
     console.error("Seeding failed:", error);
