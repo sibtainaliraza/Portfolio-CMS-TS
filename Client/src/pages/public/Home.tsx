@@ -43,10 +43,7 @@ export default function Home() {
           >
             View Projects
           </Link>
-          <a 
-            href={`${API_BASE_URL}/resume/download`} 
-            className="glass border border-white/10 px-8 py-3 rounded-full font-bold hover:bg-white/5 transition-colors"
-          >
+          <a href={`${API_BASE_URL}/resume/download`} target="_blank" rel="noopener noreferrer">
             Download CV
           </a>
         </div>
