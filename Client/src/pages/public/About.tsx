@@ -68,7 +68,7 @@ export default function AboutPage() {
 
           <div className="glass p-8 rounded-3xl border border-white/5 bg-white/[0.02]">
             <h3 className="text-xs uppercase tracking-widest text-gray-500 mb-4 font-bold">Current Mission</h3>
-            <p className="text-white text-sm font-medium">Seeking Full-Stack Developer roles in Kolkata / Remote.</p>
+            <p className="text-white text-sm font-medium">Seeking Software Engineer roles in Kolkata / Remote to build intelligent applications blending AI/ML with scalable MERN backends.</p>
           </div>
         </aside>
       </div>
