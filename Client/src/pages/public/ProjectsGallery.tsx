@@ -22,7 +22,7 @@ export default function ProjectGallery() {
     return (
       <div className="container mx-auto px-6 py-24 text-center">
         <div className="inline-block w-8 h-8 border-2 border-electric-teal border-t-transparent rounded-full animate-spin mb-4"></div>
-        <p className="text-gray-500 font-mono text-xs uppercase tracking-widest">Synchronizing Project Data...</p>
+        <p className="text-gray-500 font-mono text-xs uppercase tracking-widest">Loading Project Data...</p>
       </div>
     );
   }
