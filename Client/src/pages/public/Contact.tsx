@@ -62,7 +62,7 @@ export default function Contact() {
                     <div className="absolute inset-0 bg-black/95 backdrop-blur-md z-10 flex flex-col items-center justify-center text-center p-6">
                         <div className="w-16 h-16 rounded-full bg-electric-teal/20 text-electric-teal flex items-center justify-center text-3xl mb-4 border border-electric-teal/50">✓</div>
                         <h3 className="text-2xl font-bold text-white mb-2">Message Secured</h3>
-                        <p className="text-gray-400">Transmitted to the admin core successfully.</p>
+                        <p className="text-gray-400">Message sent successfully.</p>
                     </div>
                 )}
 
