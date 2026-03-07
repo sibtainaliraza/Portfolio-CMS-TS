@@ -28,12 +28,11 @@ export default function Home() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-electric-teal/10 blur-[120px] rounded-full pointer-events-none"></div>
 
         <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 relative z-10">
-          Full-Stack <span className="text-[var(--color-electric-teal)] glow-text-teal">Developer</span>
+          Full-Stack & AI <span className="text-[var(--color-electric-teal)] glow-text-teal">Developer</span>
         </h1>
 
         <p className="text-gray-400 text-lg md:text-xl mb-10 relative z-10">
-          Building Scalable MERN applications with clean architecture
-          and high-performance digital experiences.
+          Building scalable MERN applications with clean architecture, alongside applied machine learning models for high-performance digital experiences.
         </p>
 
         <div className="flex flex-wrap gap-4 justify-center relative z-10">
@@ -43,30 +42,30 @@ export default function Home() {
           >
             View Projects
           </Link>
-          
+
           <a
-  href={`${API_BASE_URL}/resume/download`}
-  target="_blank"
-  rel="noopener noreferrer"
-  className="px-8 py-3 rounded-full font-bold border border-white/20 bg-white/5 backdrop-blur-md hover:bg-white/10 hover:border-electric-teal/50 hover:text-electric-teal transition-all duration-300 flex items-center gap-2"
->
-  <svg 
-    xmlns="http://www.w3.org/2000/svg" 
-    width="20" 
-    height="20" 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    strokeLinecap="round" 
-    strokeLinejoin="round"
-  >
-    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-    <polyline points="7 10 12 15 17 10" />
-    <line x1="12" x2="12" y1="15" y2="3" />
-  </svg>
-  Download CV
-</a>
+            href={`${API_BASE_URL}/resume/download`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-3 rounded-full font-bold border border-white/20 bg-white/5 backdrop-blur-md hover:bg-white/10 hover:border-electric-teal/50 hover:text-electric-teal transition-all duration-300 flex items-center gap-2"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" x2="12" y1="15" y2="3" />
+            </svg>
+            Download CV
+          </a>
 
         </div>
       </motion.div>
