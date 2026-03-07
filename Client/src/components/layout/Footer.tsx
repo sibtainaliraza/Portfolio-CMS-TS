@@ -14,7 +14,7 @@ export default function Footer(){
                 <div className="flex items-center gap-8 text-gray-400 text-sm order-1 md:order-2">
 
                     <a 
-                        href="mailto:your.email@example.com" 
+                        href="sibtain@sibtainaliraza.com" 
                         className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center hover:bg-[var(--color-electric-teal)] hover:shadow-[0_0_15px_var(--color-electric-teal)] transition-all duration-300"
                         title="Email Me"
                     >
