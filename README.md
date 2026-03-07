@@ -65,7 +65,7 @@ The system is architected to be "stateless" regarding file storage to ensure com
 ## Environment Configuration
 To run this project locally, create an `.env` file in the server root:
 ```env
-PORT=8000
+PORT=your_port
 MONGODB_URI=your_mongodb_cluster_link
 JWT_SECRET=your_secure_random_key
 CLOUDINARY_CLOUD_NAME=your_name
